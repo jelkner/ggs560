@@ -17,7 +17,7 @@ def variance(dataset, population=False):
     """
     div = len(dataset) if population else len(dataset) - 1
     dsmean = mean(dataset)
-    return sum([(xi - dsmean) ** 2 for xi in dataset]) / div 
+    return sum([(xi - dsmean) ** 2 for xi in dataset]) / div
 
 
 def standard_deviation(dataset, population=False):
@@ -50,7 +50,20 @@ def skewness(dataset, population=False):
     m = mean(dataset)
     n = len(dataset) if population else len(dataset) - 1
     numerator = sum([(xi - m) ** 3 for xi in dataset])
-    denominator =  n * standard_deviation(dataset) ** 3
+    denominator = n * standard_deviation(dataset) ** 3
+    return numerator / denominator
+
+
+def kurtosis(dataset, population=False):
+    """
+      >>> from sample_data import data_set1 as ds
+      >>> round(kurtosis(ds), 3)
+      2.665
+    """
+    m = mean(dataset)
+    n = len(dataset) if population else len(dataset) - 1
+    numerator = sum([(xi - m) ** 4 for xi in dataset])
+    denominator = n * standard_deviation(dataset) ** 4
     return numerator / denominator
 
 
