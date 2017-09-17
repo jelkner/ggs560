@@ -48,9 +48,10 @@ def skewness(dataset, population=False):
       -0.115
     """
     m = mean(dataset)
-    top = sum([(xi - m) ** 3 for xi in dataset])
-    bottom = len(dataset) * standard_deviation(dataset, population=True) ** 3
-    return top / bottom
+    n = len(dataset) if population else len(dataset) - 1
+    numerator = sum([(xi - m) ** 3 for xi in dataset])
+    denominator =  n * standard_deviation(dataset) ** 3
+    return numerator / denominator
 
 
 if __name__ == '__main__':
