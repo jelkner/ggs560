@@ -32,6 +32,15 @@ def std_deviation(dataset, population=False):
     return ((sum([xi ** 2 for xi in dataset]) - n * dsmean ** 2) / div) ** 0.5
 
 
+def coefficient_of_variation(dataset, population=False):
+    """
+      >>> from sample_data import data_set1 as ds
+      >>> round(coefficient_of_variation(ds), 4)
+      0.1146
+    """
+    return std_deviation(dataset, population) / mean(dataset)
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
