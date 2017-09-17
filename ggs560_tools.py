@@ -20,10 +20,10 @@ def variance(dataset, population=False):
     return sum([(xi - dsmean) ** 2 for xi in dataset]) / div 
 
 
-def std_deviation(dataset, population=False):
+def standard_deviation(dataset, population=False):
     """
       >>> from sample_data import data_set1 as ds
-      >>> round(std_deviation(ds), 4)
+      >>> round(standard_deviation(ds), 4)
       0.6392
     """
     n = len(dataset)
@@ -38,7 +38,19 @@ def coefficient_of_variation(dataset, population=False):
       >>> round(coefficient_of_variation(ds), 4)
       0.1146
     """
-    return std_deviation(dataset, population) / mean(dataset)
+    return standard_deviation(dataset, population) / mean(dataset)
+
+
+def skewness(dataset, population=False):
+    """
+      >>> from sample_data import data_set1 as ds
+      >>> round(skewness(ds), 3)
+      -0.115
+    """
+    m = mean(dataset)
+    top = sum([(xi - m) ** 3 for xi in dataset])
+    bottom = len(dataset) * standard_deviation(dataset, population=True) ** 3
+    return top / bottom
 
 
 if __name__ == '__main__':
