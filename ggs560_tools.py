@@ -69,7 +69,8 @@ def kurtosis(dataset, population=False):
 
 def mean_center(points):
     """
-      >>> from sample_data import point_data as points
+      >>> from sample_data import point_data_n_weights as pnw
+      >>> points = [pnw[i][0] for i in range(len(pnw))]
       >>> x, y = mean_center(points)
       >>> round(x, 2)
       46.22
@@ -78,6 +79,25 @@ def mean_center(points):
     """
     x = sum([points[i][0] for i in range(len(points))]) / len(points)
     y = sum([points[i][1] for i in range(len(points))]) / len(points)
+    return (x, y)
+
+
+def weighted_mean_center(points_with_weights):
+    """
+      >>> from sample_data import point_data_n_weights as pnw
+      >>> x, y = weighted_mean_center(pnw)
+      >>> round(x, 2)
+      60.34
+      >>> round(y, 2)
+      62.57
+    """
+    pnw = points_with_weights
+    n = len(pnw)
+    x_times_w_sum = sum([pnw[i][0][0] * pnw[i][1] for i in range(n)])
+    w_sum = sum([pnw[i][1] for i in range(n)])
+    x = x_times_w_sum / w_sum
+    y_times_w_sum = sum([pnw[i][0][1] * pnw[i][1] for i in range(n)])
+    y = y_times_w_sum / w_sum
     return (x, y)
 
 
