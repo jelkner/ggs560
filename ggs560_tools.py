@@ -67,6 +67,20 @@ def kurtosis(dataset, population=False):
     return numerator / denominator
 
 
+def mean_center(points):
+    """
+      >>> from sample_data import point_data as points
+      >>> x, y = mean_center(points)
+      >>> round(x, 2)
+      46.22
+      >>> round(y, 2)
+      49.56
+    """
+    x = sum([points[i][0] for i in range(len(points))]) / len(points)
+    y = sum([points[i][1] for i in range(len(points))]) / len(points)
+    return (x, y)
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
