@@ -101,6 +101,16 @@ def weighted_mean_center(points_with_weights):
     return (x, y)
 
 
+def weighted_standard_distance(points_with_weights):
+    xwmc, ywmc = weighted_mean_center(points_with_weights)
+    pnw = points_with_weights
+    n = len(pnw)
+    wxsq = sum([pnw[i][1] * (pnw[i][0][0] - xwmc) ** 2 for i in range(n)])
+    wysq = sum([pnw[i][1] * (pnw[i][0][1] - ywmc) ** 2 for i in range(n)])
+    wsum = sum([pnw[i][1] for i in range(n)])
+    return ((wxsq + wysq) / wsum) ** 0.5
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
