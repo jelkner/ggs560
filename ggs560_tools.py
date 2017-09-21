@@ -1,3 +1,9 @@
+#
+#  Functions for Homework 3 of GMU GGS 560 class Fall 2017.
+#  Doctests use values provided by examples in "Elementary Statistics for
+#  Geographers, 3rd Ed." to confirm that each function computes desired
+#  values. File sample_data.py contains the data used for the doctests. 
+#
 def mean(dataset):
     """
       >>> mean([1, 2, 3])
