@@ -123,6 +123,7 @@ def weighted_standard_distance(points_with_weights):
 def confidence_interval(data, percent):
     """
     Setup a test using the example from page 312 of our text.
+    Needed to create some data with a standard deviation of 4.
 
        >>> d = [12] * 12 + [16] + [20] * 12
        >>> confidence_interval(d, 95)
