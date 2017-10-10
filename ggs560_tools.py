@@ -1,9 +1,12 @@
 #
-#  Functions for Homework 3 of GMU GGS 560 class Fall 2017.
+#  Functions for GMU GGS 560 Fall 2017 Homework.
 #  Doctests use values provided by examples in "Elementary Statistics for
 #  Geographers, 3rd Ed." to confirm that each function computes desired
-#  values. File sample_data.py contains the data used for the doctests. 
+#  values. File sample_data.py contains the data used for the doctests.
 #
+import scipy.stats
+
+
 def mean(dataset):
     """
       >>> mean([1, 2, 3])
@@ -115,6 +118,33 @@ def weighted_standard_distance(points_with_weights):
     wysq = sum([pnw[i][1] * (pnw[i][0][1] - ywmc) ** 2 for i in range(n)])
     wsum = sum([pnw[i][1] for i in range(n)])
     return ((wxsq + wysq) / wsum) ** 0.5
+
+
+def t_table_value(alpha, df):
+    """
+      >>> print('{:0.3f}'.format(t_table_value(0.025, 10)))
+      2.228
+      >>> print('{:0.3f}'.format(t_table_value(0.005, 30)))
+      2.750
+    """
+    return scipy.stats.t.ppf(1-alpha, df)
+
+
+def confidence_interval(data, percent):
+    """
+    Setup a test using the example from page 312 of our text.
+
+       >>> d = [12] * 12 + [16] + [20] * 12
+       >>> confidence_interval(d, 95)
+       '[14.349, 17.651]'
+    """
+    alpha = (1 - percent / 100) / 2
+    t = t_table_value(alpha, len(data)-1)
+    s = standard_deviation(data)
+    error = t * s / len(data) ** 0.5
+    m = mean(data)
+
+    return '[{:0.3f}, {:0.3f}]'.format(m - error, m + error)
 
 
 if __name__ == '__main__':
