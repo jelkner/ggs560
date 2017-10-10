@@ -138,6 +138,18 @@ def confidence_interval(data, percent):
     return '[{:0.3f}, {:0.3f}]'.format(m - error, m + error)
 
 
+def confidence_interval2(mean, stddev, ds, percent):
+    """
+       >>> confidence_interval2(16, 4, 25, 95)
+       '[14.349, 17.651]'
+    """
+    alpha = (1 - percent / 100) / 2
+    t = scipy.stats.t.ppf(1-alpha, ds-1)
+    error = t * stddev / ds ** 0.5
+
+    return '[{:0.3f}, {:0.3f}]'.format(mean - error, mean + error)
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
