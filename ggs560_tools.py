@@ -120,16 +120,6 @@ def weighted_standard_distance(points_with_weights):
     return ((wxsq + wysq) / wsum) ** 0.5
 
 
-def t_table_value(alpha, df):
-    """
-      >>> print('{:0.3f}'.format(t_table_value(0.025, 10)))
-      2.228
-      >>> print('{:0.3f}'.format(t_table_value(0.005, 30)))
-      2.750
-    """
-    return scipy.stats.t.ppf(1-alpha, df)
-
-
 def confidence_interval(data, percent):
     """
     Setup a test using the example from page 312 of our text.
@@ -139,7 +129,7 @@ def confidence_interval(data, percent):
        '[14.349, 17.651]'
     """
     alpha = (1 - percent / 100) / 2
-    t = t_table_value(alpha, len(data)-1)
+    t = scipy.stats.t.ppf(1-alpha, len(data)-1)
     s = standard_deviation(data)
     error = t * s / len(data) ** 0.5
     m = mean(data)
