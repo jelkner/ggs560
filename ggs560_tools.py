@@ -65,6 +65,10 @@ def skewness(dataset, population=False):
 
 def kurtosis(dataset, population=False):
     """
+    Using the kurtosis definition given in class, with
+    3 subtracted from the ratio to align it with the
+    normal distribution
+    
       >>> from sample_data import data_set1 as ds
       >>> round(kurtosis(ds), 3)
       2.665
@@ -73,7 +77,7 @@ def kurtosis(dataset, population=False):
     n = len(dataset) if population else len(dataset) - 1
     numerator = sum([(xi - m) ** 4 for xi in dataset])
     denominator = n * standard_deviation(dataset) ** 4
-    return numerator / denominator
+    return (numerator / denominator) - 3
 
 
 def mean_center(points):
