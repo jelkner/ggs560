@@ -71,7 +71,7 @@ def kurtosis(dataset, population=False):
     
       >>> from sample_data import data_set1 as ds
       >>> round(kurtosis(ds), 3)
-      2.665
+      -0.335
     """
     m = mean(dataset)
     n = len(dataset) if population else len(dataset) - 1
@@ -152,6 +152,19 @@ def confidence_interval2(mean, stddev, ds, percent):
     error = t * stddev / ds ** 0.5
 
     return '[{:0.3f}, {:0.3f}]'.format(mean - error, mean + error)
+
+
+def pearson_coeff(ds1, ds2):
+    """
+      >>> pearson_coeff([0, 1, 2, 3], [3, 5, 7, 9])
+      1.0
+    """
+    sd = standard_deviation
+    m1 = mean(ds1)
+    m2 = mean(ds2)
+    numerator = sum([(ds1[i] - m1) * (ds2[i] - m2) for i in range(len(ds1))])
+    denominator = (len(ds1) - 1) * sd(ds1) * sd(ds2)
+    return numerator / denominator
 
 
 if __name__ == '__main__':
