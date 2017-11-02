@@ -68,7 +68,7 @@ def kurtosis(dataset, population=False):
     Using the kurtosis definition given in class, with
     3 subtracted from the ratio to align it with the
     normal distribution
-    
+
       >>> from sample_data import data_set1 as ds
       >>> round(kurtosis(ds), 3)
       -0.335
