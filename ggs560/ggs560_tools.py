@@ -114,6 +114,15 @@ def weighted_mean_center(points_with_weights):
     return (x, y)
 
 
+def standard_distance(xs, ys):
+    n = len(xs)
+    cx = mean(xs)
+    cy = mean(ys)
+    xdms = sum((x - cx) ** 2 for x in xs)
+    ydms = sum((y - cy) ** 2 for y in ys)
+    return ((xdms + ydms) / n) ** 0.5
+
+
 def weighted_standard_distance(points_with_weights):
     xwmc, ywmc = weighted_mean_center(points_with_weights)
     pnw = points_with_weights
