@@ -1,0 +1,593 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{GGS560 Homework 9}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+\setcounter{secnumdepth}{0} % Turns off numbering for sections
+\setlength{\parindent}{0cm}
+
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+
+    \hypertarget{jeffrey-elkner}{%
+\subsection{Jeffrey Elkner}\label{jeffrey-elkner}}
+
+\hypertarget{problem-point-pattern-descriptors}{%
+\subsubsection{Problem: Point Pattern
+Descriptors}\label{problem-point-pattern-descriptors}}
+
+The tracking data for Hurricane Bill (2009) is given in the attached
+package, suitable for ArcGIS. One folder contains the best track data
+via SHIPS database (SHIPS\_2009Bill) and the other is a track
+forecasting data from NHC (National Hurricane Center) for Hurricane Bill
+at August 17 at 1500 (2009BillForecasting17\_1500) for forecasting
+tracks in 12 hours interval for 3 days and 24 hour interval beyond that
+for up to 5 days. Using the SHIPS data, please
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Calculate the Standard Distance and output the SD value (3 points)
+\end{enumerate}
+\end{quote}
+
+\vskip 0.2in
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} SOLUTION}
+        \PY{c+c1}{\PYZsh{} http://webspace.ship.edu/pgmarr/Geo441/Examples/Standard\PYZpc{}20Distance.pdf}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{rcdefaults}\PY{p}{(}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{patches} \PY{k}{import} \PY{n}{Circle}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{thinkstats2} \PY{k}{as} \PY{n+nn}{ts}
+        \PY{k+kn}{import} \PY{n+nn}{shapefile}
+        \PY{k+kn}{from} \PY{n+nn}{ggs560}\PY{n+nn}{.}\PY{n+nn}{ggs560\PYZus{}tools} \PY{k}{import} \PY{n}{mean\PYZus{}center}\PY{p}{,} \PY{n}{standard\PYZus{}distance}
+        
+        \PY{k}{def} \PY{n+nf}{shape2dataframe}\PY{p}{(}\PY{n}{path2shape}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sf} \PY{o}{=} \PY{n}{shapefile}\PY{o}{.}\PY{n}{Reader}\PY{p}{(}\PY{n}{path2shape}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}grab the shapefile\PYZsq{}s field names (omit the first psuedo field)}
+            \PY{n}{fields} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{sf}\PY{o}{.}\PY{n}{fields}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+            \PY{n}{records} \PY{o}{=} \PY{n}{sf}\PY{o}{.}\PY{n}{records}\PY{p}{(}\PY{p}{)}
+            \PY{n}{shps} \PY{o}{=} \PY{p}{[}\PY{n}{s}\PY{o}{.}\PY{n}{points} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{sf}\PY{o}{.}\PY{n}{shapes}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{}write the records into a dataframe}
+            \PY{n}{shpdf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{fields}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{records}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}add the coordinate data to a column called \PYZdq{}coords\PYZdq{}}
+            \PY{n}{shpdf} \PY{o}{=} \PY{n}{shpdf}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{coords}\PY{o}{=}\PY{n}{shps}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{shpdf}
+        
+        \PY{n}{df} \PY{o}{=} \PY{n}{shape2dataframe}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/SHIPS\PYZus{}2009Bill/SHIPS\PYZus{}2009Bill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{calc\PYZus{}and\PYZus{}display\PYZus{}standard\PYZus{}distance}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{xs} \PY{o}{=} \PY{p}{[}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{coords}\PY{p}{]}
+            \PY{n}{ys} \PY{o}{=} \PY{p}{[}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{coords}\PY{p}{]}
+            \PY{n}{cx}\PY{p}{,} \PY{n}{cy} \PY{o}{=} \PY{n}{mean\PYZus{}center}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sd} \PY{o}{=} \PY{n}{standard\PYZus{}distance}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Print out the mean center and standard distance}
+            \PY{n}{s} \PY{o}{=} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The standard distance is }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{ from mean center }\PY{l+s+s2}{\PYZdq{}}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{of (}\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{, }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{).}\PY{l+s+s2}{\PYZdq{}}
+                \PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sd}\PY{p}{,} \PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{cx}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{cy}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{cx} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cy} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{circle} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{p}{(}\PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{)}\PY{p}{,} \PY{n}{sd}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}artist}\PY{p}{(}\PY{n}{circle}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitute}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+        \PY{n}{calc\PYZus{}and\PYZus{}display\PYZus{}standard\PYZus{}distance}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Path of Hurricane Bill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The standard distance is 16.16 from mean center of (-53.87, 23.10).
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calculate the deviational ellipse (Directional Distribution) and
+  output the rotation angle, and the deviations along the major axis and
+  minor axis. (3 points)
+\end{enumerate}
+\end{quote}
+
+\vskip 0.2in
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} SOLUTION}
+        \PY{c+c1}{\PYZsh{} http://tinyurl.com/standarddeviationalellipse}
+        \PY{c+c1}{\PYZsh{} http://tinyurl.com/standarddeviationalellipse2}
+        \PY{c+c1}{\PYZsh{} http://tinyurl.com/standarddeviationalellipse3}
+        \PY{c+c1}{\PYZsh{} http://blog.mmast.net/conics\PYZhy{}matplotlib}
+        
+        \PY{k}{def} \PY{n+nf}{directional\PYZus{}distribution\PYZus{}analysis}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{xs} \PY{o}{=} \PY{p}{[}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{coords}\PY{p}{]}
+            \PY{n}{ys} \PY{o}{=} \PY{p}{[}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{coords}\PY{p}{]}
+            \PY{n}{cx}\PY{p}{,} \PY{n}{cy} \PY{o}{=} \PY{n}{mean\PYZus{}center}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Move points to center at mean center}
+            \PY{n}{xps} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}i} \PY{o}{\PYZhy{}} \PY{n}{cx} \PY{k}{for} \PY{n}{x\PYZus{}i} \PY{o+ow}{in} \PY{n}{xs}\PY{p}{]}
+            \PY{n}{yps} \PY{o}{=} \PY{p}{[}\PY{n}{y\PYZus{}i} \PY{o}{\PYZhy{}} \PY{n}{cy} \PY{k}{for} \PY{n}{y\PYZus{}i} \PY{o+ow}{in} \PY{n}{ys}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} Calulate A, B, and C}
+            \PY{n}{A} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}i}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{x\PYZus{}i} \PY{o+ow}{in} \PY{n}{xps}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{y\PYZus{}i}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{y\PYZus{}i} \PY{o+ow}{in} \PY{n}{yps}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} compute the sum of products of moved points}
+            \PY{n}{sop} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{xps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{yps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xps}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+            \PY{n}{B} \PY{o}{=} \PY{p}{(}\PY{n}{A}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{4} \PY{o}{*} \PY{n}{sop}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}
+            \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sop}
+        
+            \PY{c+c1}{\PYZsh{} Calculate the angle of rotation}
+            \PY{n}{tan\PYZus{}theta} \PY{o}{=} \PY{p}{(}\PY{n}{A} \PY{o}{+} \PY{n}{B}\PY{p}{)} \PY{o}{/} \PY{n}{C}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arctan}\PY{p}{(}\PY{n}{tan\PYZus{}theta}\PY{p}{)}
+            \PY{n}{s} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The angle of rotation is }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{ radians or }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{ degrees.}\PY{l+s+s2}{\PYZdq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{degrees}\PY{p}{(}\PY{p}{[}\PY{n}{theta}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Calculate deviations along major and minor axes}
+            \PY{c+c1}{\PYZsh{} Precalculate some values}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xps}\PY{p}{)}
+            \PY{n}{cos\PYZus{}theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+            \PY{n}{sin\PYZus{}theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Calculate x\PYZhy{}axis deviation}
+            \PY{n}{numeratorSigmaX} \PY{o}{=}  \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{xps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{cos\PYZus{}theta} \PY{o}{\PYZhy{}}
+                                     \PY{n}{yps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{sin\PYZus{}theta}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{n}{SigmaX} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{numeratorSigmaX} \PY{o}{/} \PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}
+        
+            \PY{c+c1}{\PYZsh{} Calculate y\PYZhy{}axis deviation}
+            \PY{n}{numeratorSigmaY} \PY{o}{=}  \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{xps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{sin\PYZus{}theta} \PY{o}{+}
+                                     \PY{n}{yps}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{cos\PYZus{}theta}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{n}{SigmaY} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{numeratorSigmaY} \PY{o}{/} \PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}
+        
+            \PY{n}{s} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The axes deviations are x\PYZhy{}axis: }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{ and y\PYZhy{}axis: }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{SigmaX}\PY{p}{,} \PY{n}{SigmaY}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{,} \PY{n}{xps}\PY{p}{,} \PY{n}{yps}\PY{p}{,} \PY{n}{SigmaX}\PY{p}{,} \PY{n}{SigmaY} 
+        
+        
+        \PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{,} \PY{n}{xps}\PY{p}{,} \PY{n}{yps}\PY{p}{,} \PY{n}{SigmaX}\PY{p}{,} \PY{n}{SigmaY} \PY{o}{=} \PY{n}{directional\PYZus{}distribution\PYZus{}analysis}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The angle of rotation is -0.82 radians or -46.90 degrees.
+The axes deviations are x-axis: 8.12 and y-axis: 21.37.
+
+    \end{Verbatim}
+
+
+    \begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Show that the total circular variance is conserved before and after
+  the rotation or the conservation relationship between the standard
+  distance and the semi-major and semi-minor axes of the deviational
+  ellipse. (3 points)
+\end{enumerate}
+\end{quote}
+
+\vskip 0.2in
+
+
+    \emph{Solution}: From slide 17 in our notes, we will verifying that
+\(2(\sigma_x^2 + \sigma_y^2) = 2SD^2\).
+
+\vskip 0.2in
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{var1} \PY{o}{=} \PY{n}{SigmaX}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{SigmaY}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+        \PY{n}{xssq} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{cx}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{xs}\PY{p}{]}\PY{p}{)}
+        \PY{n}{yssq} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{cy}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{ys}\PY{p}{]}\PY{p}{)}
+        \PY{n}{var2} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{xssq} \PY{o}{+} \PY{n}{yssq}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xs}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s1}{ equals }\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{var1}\PY{p}{,} \PY{n}{var2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+522.56 equals 522.56?
+
+    \end{Verbatim}
+
+
+    The results are equal and we have shown that circular variance is
+conserved.
+
+\vskip 0.2in
+
+
+    \begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Use the forecasting data to repeat the Directional Distribution
+  analysis. (1 point)
+\end{enumerate}
+\end{quote}
+
+\vskip 0.2in
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} SOLUTION}
+        \PY{n}{df2} \PY{o}{=} \PY{n}{shape2dataframe}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/BillForcast/2009Bill\PYZus{}Forecasting17\PYZus{}1500}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{calc\PYZus{}and\PYZus{}display\PYZus{}standard\PYZus{}distance}\PY{p}{(}\PY{n}{df2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Forcasted Path of Hurricane Bill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{results} \PY{o}{=} \PY{n}{directional\PYZus{}distribution\PYZus{}analysis}\PY{p}{(}\PY{n}{df2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The standard distance is 9.28 from mean center of (-55.12, 19.74).
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The angle of rotation is -0.90 radians or -51.63 degrees.
+The axes deviations are x-axis: 1.87 and y-axis: 12.99.
+
+    \end{Verbatim}
+
+
+    \begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  (Optional/open-end) Please compare the results of the directional
+  distribution from the SHIPS data and from the forecasting data and
+  discuss the possibility for using the forecasting data to cluster
+  tracks of tropical cyclones. (xx points)
+\end{enumerate}
+\end{quote}
+
+\vskip 0.2in
+
+
+    \emph{SOLUTION}: The mean center and angle of rotation of both the
+actual path in the SHIPS data and that of the forcast appear fairly
+close, while the minor axis of the elipse of the actual path of
+Hurricane Bill is larger than that of the forcaste. This is a result of
+the larger curvature of the actual path the hurricane followed.
+
+\vskip 0.2in
+
+
+    \hypertarget{notes-for-additional-information}{%
+\paragraph{Notes for additional
+information:}\label{notes-for-additional-information}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The SHIPS data files can be found at
+  ftp://rammftp.cira.colostate.edu/demaria/SHIPS/. One of the data files
+  for the period 1989-2009 hurricane season can be downloaded at
+  ftp://rammftp.cira.colostate.edu/demaria/SHIPS/2010/lsdiaga\_1982\_2009\_rean\_biascorr\_sat.dat,
+  and the corresponding document file for this data file is also
+  available at
+  ftp://rammftp.cira.colostate.edu/demaria/SHIPS/2009/SHIPS\_predictor\_file\_2009.doc.
+  The original data are in ASCII but the data are hard to handle.
+\item
+  The forecasting data can be found at http://www.nhc.noaa.gov/data/.
+  More information including the metadata information can also be found
+  in the same site.
+\end{enumerate}
+
+\vskip 0.2in
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
