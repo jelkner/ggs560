@@ -1,0 +1,5 @@
+$ sudo apt install saga
+$ sudo apt install r-base
+$ sudo apt install r-cran-maptools
+$ sudo apt install python3-gdal
+$ sudo apt install rasterio
